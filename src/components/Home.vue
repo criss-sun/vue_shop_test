@@ -5,36 +5,18 @@
         <img src="~assets/monkey.png" alt="" />
         黑叶猴管理系统
       </div>
-      <el-button type="info" @click="logout">退出</el-button></el-header
-    >
+      <el-button type="info" @click="logout">退出</el-button>
+    </el-header>
     <el-container>
       <el-aside :width="isCollapse ? '64px' : '200px'">
         <div class="toggle-button" @click="toggleCollapse">|||</div>
-        <el-menu
-          background-color="#333744"
-          text-color="#fff"
-          active-text-color="#409eff"
-          :unique-opened="true"
-          :collapse="isCollapse"
-          :collapse-transition="false"
-          :router="true"
-          :default-active="activePath"
-        >
-          <el-submenu
-            :index="item.id + ''"
-            v-for="item in menuList"
-            :key="item.id"
-          >
+        <el-menu background-color="#333744" text-color="#fff" active-text-color="#409eff" :unique-opened="true" :collapse="isCollapse" :collapse-transition="false" :router="true" :default-active="activePath">
+          <el-submenu :index="item.id + ''" v-for="item in menuList" :key="item.id">
             <template slot="title">
               <i :class="iconObj[item.id]"></i>
               <span>{{ item.authName }}</span>
             </template>
-            <el-menu-item
-              :index="'/' + item.path"
-              v-for="item in item.children"
-              :key="item.id"
-              @click="saveNavState('/' + item.path)"
-            >
+            <el-menu-item :index="'/' + item.path" v-for="item in item.children" :key="item.id" @click="saveNavState('/' + item.path)">
               <template slot="title">
                 <i class="el-icon-menu"></i>
                 <span>{{ item.authName }}</span>
@@ -54,7 +36,7 @@
 export default {
   created() {
     this.getMenuList();
-    this.activePath = sessionStorage.getItem('activePath')
+    this.activePath = sessionStorage.getItem("activePath");
   },
 
   data() {
@@ -86,7 +68,7 @@ export default {
       this.isCollapse = !this.isCollapse;
     },
     saveNavState(path) {
-      this.activePath = path
+      this.activePath = path;
       sessionStorage.setItem("activePath", path);
     },
   },
